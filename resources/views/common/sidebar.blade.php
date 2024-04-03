@@ -26,12 +26,12 @@
                     <div class="collapse show" id="rolesandpermissions">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="{{route('permission.index')}}" class="nav-link">
                                     <span class="nav-link-test">Permissions</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="{{route('role.index')}}" class="nav-link">
                                     <span class="nav-link-text">Roles</span>
                                 </a>
                             </li>

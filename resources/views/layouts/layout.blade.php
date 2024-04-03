@@ -19,6 +19,7 @@
     <link href="{{asset('theme/assets/css/nucleo-svg.css')}}" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="{{asset('theme/assets/css/argon-dashboard.css?v=2.0.4')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.bootstrap5.min.css">
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -26,9 +27,8 @@
     @if(\Illuminate\Support\Facades\Auth::check())
         @include('common/sidebar')
     @endif
-    <main class="main-content position-relative border-radius-lg">
+    <main class="main-content border-radius-lg">
         @if(\Illuminate\Support\Facades\Auth::check())
-
             <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
                 <div class="container-fluid py-1 px-3">
                     <nav aria-label="breadcrumb">
@@ -56,13 +56,16 @@
         @endif
 
         <div class="container-fluid py-4">
+
             @yield('content')
         </div>
     </main>
 </div>
 
 <script src="https://kit.fontawesome.com/988bd32eb3.js" crossorigin="anonymous"></script>
-<script src="{{asset('theme/assets/js/core/popper.min.js')}}"></script>
+<script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.3/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{asset('theme/assets/js/core/bootstrap.min.js')}}"></script>
 <script src="{{asset('theme/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
     <script src="{{asset('theme/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>

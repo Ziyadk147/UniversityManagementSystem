@@ -17,9 +17,10 @@ class PermissionServiceProvider extends ServiceProvider
         $this->app->bind(PermissionRepository::class , function($app){
             return new PermissionRepository(new Permission());
         });
-        $this->app->bind(PermissionRepository::class , function($app){
-            return new PermissionService($this->app->make(PermissionRepository::class));
+        $this->app->bind(PermissionService::class , function($app){
+            return new PermissionService($app->make(PermissionRepository::class));
         });
+        $this->app->register(PermissionInterfaceServiceProvider::class);
     }
 
     /**
