@@ -1,5 +1,4 @@
 @extends('layouts.layout')
-
 @section('content')
     <div class="row mt-4 justify-content-center">
 

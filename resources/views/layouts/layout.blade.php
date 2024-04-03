@@ -22,9 +22,13 @@
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
-    <div class="min-height-300 bg-primary position-absolute w-100">
+<div class="min-height-300 bg-primary position-absolute w-100">
+    @if(\Illuminate\Support\Facades\Auth::check())
         @include('common/sidebar')
-        <main class="main-content position-relative border-radius-lg">
+    @endif
+    <main class="main-content position-relative border-radius-lg">
+        @if(\Illuminate\Support\Facades\Auth::check())
+
             <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
                 <div class="container-fluid py-1 px-3">
                     <nav aria-label="breadcrumb">
@@ -49,16 +53,18 @@
                     </div>
                 </div>
             </nav>
+        @endif
 
-            <div class="container-fluid py-4">
-                @yield('content')
-            </div>
-        </main>
-    </div>
+        <div class="container-fluid py-4">
+            @yield('content')
+        </div>
+    </main>
+</div>
 
-    <script src="{{asset('theme/assets/js/core/popper.min.js')}}"></script>
-    <script src="{{asset('theme/assets/js/core/bootstrap.min.js')}}"></script>
-    <script src="{{asset('theme/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
+<script src="https://kit.fontawesome.com/988bd32eb3.js" crossorigin="anonymous"></script>
+<script src="{{asset('theme/assets/js/core/popper.min.js')}}"></script>
+<script src="{{asset('theme/assets/js/core/bootstrap.min.js')}}"></script>
+<script src="{{asset('theme/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
     <script src="{{asset('theme/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
     <script src="{{asset('theme/assets/js/plugins/chartjs.min.js')}}"></script>
     <script>
