@@ -12,4 +12,6 @@ interface RoleInterface{
     public function updateRole($data ,$id);
     public function destroyRole($id);
 
+
+    public function getRolePermissions($id);
 }

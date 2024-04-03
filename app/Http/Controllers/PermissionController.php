@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Permission\PermissionStoreValidationRequest;
 use App\Services\PermissionService;
+use App\Services\RoleService;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
 {
 
-    private $permissionService;
-    public function __construct(PermissionService $permissionService)
+    private $permissionService , $roleService;
+    public function __construct(PermissionService $permissionService , RoleService $roleService)
     {
         $this->permissionService = $permissionService;
+        $this->roleService= $roleService;
     }
 
     /**
@@ -75,5 +77,30 @@ class PermissionController extends Controller
     {
         $this->permissionService->destroyPermission($id);
         return to_route('permission.index');
+    }
+
+    public function showBindPermissionToRole()
+    {
+        $permissions = $this->permissionService->getAllData();
+        $roles = $this->roleService->getAllRoles();
+
+        $payload['permissions'] = $permissions;
+        $payload['roles'] = $roles;
+
+        return view('permission.bind-permission' , $payload);
+    }
+
+    public function getPermissionBindedToRole(Request $request)
+    {
+        $id = $request->id;
+        $rolePermissions = $this->roleService->getRolePermissions($id);
+        return response(['status' => 200,'success' => $rolePermissions] , 200);
+    }
+
+    public function bindPermissionToRole(Request $request)
+    {
+        $role = $this->roleService->getRoleById($request->role);
+        $permissions = $request->selected_permissions;
+        //TODO:\\ Need to implement this role to permission binding
     }
 }

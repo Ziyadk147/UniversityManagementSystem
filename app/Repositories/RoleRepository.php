@@ -40,4 +40,10 @@ class RoleRepository implements  RoleInterface
     {
         return $this->getRoleById($id)->delete();
     }
+
+    public function getRolePermissions($id)
+    {
+        $role = $this->getRoleById($id);
+        return $role->permissions;
+    }
 }

@@ -9,12 +9,11 @@
                         <div class="col">
                             <h2 class="m-0 font-weight-bold text-primary">Permissions</h2>
                         </div>
-                        <div class="col-sm-4 text-right">
-                            {{--                            @can('create-permissions')--}}
+                        <div class="col-sm-6 text-right">
+
                             <a href="{{route('permission.create')}}"><button class="btn btn-primary btn-sm">Create New Permission</button></a>
-                            {{--                            @endcan--}}
-                            {{--                            @can('bind-permissions')--}}
-                            {{--                            @endcan--}}
+                            <a href="{{route('permission.bind')}}"><button class="btn btn-primary btn-sm">Bind Permission To Role</button></a>
+
                         </div>
                     </div>
                 </div>
