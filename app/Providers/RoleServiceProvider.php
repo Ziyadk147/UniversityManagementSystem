@@ -17,9 +17,11 @@ class RoleServiceProvider extends ServiceProvider
         $this->app->bind(RoleRepository::class , function($app){
             return new RoleRepository(new Role());
         });
-        $this->app->bind(RoleRepository::class , function($app){
-            return new RoleService($this->app->make(RoleRepository::class));
+        $this->app->bind(RoleService::class , function($app){
+            return new RoleService($app->make(RoleRepository::class));
         });
+        $this->app->register(RoleInterfaceServiceProvider::class);
+
     }
 
     /**

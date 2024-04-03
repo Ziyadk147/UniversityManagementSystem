@@ -16,6 +16,28 @@ class RoleRepository implements  RoleInterface
 
     public function getAllRoles()
     {
-        // TODO: Implement getAllRoles() method.
+        return $this->role->all();
+    }
+
+    public function StoreRole($data)
+    {
+
+        return $this->role->create($data);
+
+    }
+    public function getRoleById($id)
+    {
+        return $this->role->find($id);
+    }
+
+    public function updateRole($data, $id)
+    {
+        $role = $this->getRoleById($id);
+        return $role->update($data);
+    }
+
+    public function destroyRole($id)
+    {
+        return $this->getRoleById($id)->delete();
     }
 }

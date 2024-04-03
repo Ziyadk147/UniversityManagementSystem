@@ -14,6 +14,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->register(PermissionServiceProvider::class);
         $this->app->register(PermissionInterfaceServiceProvider::class);
+        $this->app->register(RoleServiceProvider::class);
+        $this->app->register(RoleInterfaceServiceProvider::class);
     }
 
     /**
