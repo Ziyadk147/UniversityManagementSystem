@@ -7,7 +7,7 @@ use App\Repositories\PermissionRepository;
 
 class PermissionService
 {
-    private $permissionRepository;
+    protected $permissionRepository;
 
     public function __construct(PermissionRepository $permissionRepository)
     {

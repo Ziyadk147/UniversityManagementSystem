@@ -7,7 +7,7 @@ use Spatie\Permission\Models\Role;
 
 class RoleRepository implements  RoleInterface
 {
-    private $role;
+    protected $role;
 
     public function __construct(Role $role)
     {
@@ -33,6 +33,7 @@ class RoleRepository implements  RoleInterface
     public function updateRole($data, $id)
     {
         $role = $this->getRoleById($id);
+
         return $role->update($data);
     }
 
