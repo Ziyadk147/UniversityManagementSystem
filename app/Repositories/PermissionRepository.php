@@ -31,6 +31,10 @@ class PermissionRepository implements PermissionInterface
         $permission = $this->getPermissionById($id);
         return $permission->update($data);
     }
+    public function bindPermissionToRole($role, $permissions)
+    {
+        return $role->syncPermissions($permissions);
+    }
 
     public function destroyPermission($id)
     {

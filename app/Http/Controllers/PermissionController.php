@@ -94,13 +94,16 @@ class PermissionController extends Controller
     {
         $id = $request->id;
         $rolePermissions = $this->roleService->getRolePermissions($id);
-        return response(['status' => 200,'success' => $rolePermissions] , 200);
+//        dd($rolePermissions);
+        return response(['status' => 200,'data' => $rolePermissions] , 200);
     }
 
     public function bindPermissionToRole(Request $request)
     {
+
         $role = $this->roleService->getRoleById($request->role);
-        $permissions = $request->selected_permissions;
-        //TODO:\\ Need to implement this role to permission binding
+        $permission = $request->selected_permission;
+        $this->permissionService->bindPermissionToRole($role , $permission);
+        return to_route('permission.bind');
     }
 }

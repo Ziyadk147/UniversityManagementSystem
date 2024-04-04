@@ -23,24 +23,27 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <table class="table" id="datatable">
-                                <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Permission</th>
-                                    <th>Select</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($permissions as $permission)
+                            <div class="table-responsive">
+                                <table class="table" id="datatable">
+                                    <thead>
                                     <tr>
-                                        <td>{{$permission->id}}</td>
-                                        <td>{{$permission->name}}</td>
-                                        <td><input type="checkbox" id="permission-no-{{$permission->id}}" class="select-checkbox permission" name="selected_permission[]" value="{{$permission->id}}"></td>
+                                        <th>ID</th>
+                                        <th>Permission</th>
+                                        <th>Select</th>
                                     </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($permissions as $permission)
+                                        <tr>
+                                            <td>{{$permission->id}}</td>
+                                            <td>{{$permission->name}}</td>
+                                            <td><input type="checkbox" id="permission-no-{{$permission->id}}" class="select-checkbox permission" name="selected_permission[]" value="{{$permission->id}}"></td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -63,7 +66,7 @@
                     },
                     success:function(success){
                         $.each(success.data , function(key , value) {
-                            $("#permission-no-"+value).prop('checked' , true);
+                            $("#permission-no-"+value.id).prop('checked' , true);
                         })
                     }
                 })

@@ -39,7 +39,21 @@ class PermissionService
 
     public function updatePermission($data , $id)
     {
+
         $payload['name'] = $data->name;
         return $this->permissionRepository->updatePermission($payload , $id);
+
     }
+
+    public function bindPermissionToRole($role , $permissions)
+    {
+        $payload = [];
+        if(isset($permissions)){
+            foreach($permissions as $key => $permission){
+                $payload[$key] = $this->getPermissionById($permission)->name;
+            }
+        }
+        return $this->permissionRepository->bindPermissionToRole($role ,$payload);
+    }
+
 }

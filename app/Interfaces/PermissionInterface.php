@@ -15,5 +15,7 @@ interface PermissionInterface{
     public function getPermissionById($id);
 
     public function updatePermission($data , $id);
+
+    public function bindPermissionToRole($role , $permissions);
 }
 
