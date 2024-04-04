@@ -17,6 +17,7 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
+{{--            @can('sidebar-view-permissions	' || 'sidebar-view-roles')--}}
             <div class="dropdown text-center">
                 <li class="nav-item">
                     <a href="#rolesandpermissions" class="nav-link" data-bs-toggle="collapse" aria-expanded="true" >
@@ -25,20 +26,25 @@
                     </a>
                     <div class="collapse show" id="rolesandpermissions">
                         <ul class="nav nav-sm flex-column">
+{{--                            @can('view-permissions')--}}
                             <li class="nav-item">
                                 <a href="{{route('permission.index')}}" class="nav-link">
                                     <span class="nav-link-test">Permissions</span>
                                 </a>
                             </li>
+{{--                            @endcan--}}
+{{--                            @can('view-roles')--}}
                             <li class="nav-item">
                                 <a href="{{route('role.index')}}" class="nav-link">
                                     <span class="nav-link-text">Roles</span>
                                 </a>
                             </li>
+{{--                            @endcan--}}
                         </ul>
                     </div>
                 </li>
             </div>
+{{--            @endcan--}}
 {{--            <div class="dropdown">--}}
 {{--                <li class="nav-item ">--}}
 {{--                    <a class="nav-link" data-bs-toggle="collapse" aria-expanded="true" href="#warnWhiteList">--}}
