@@ -59,13 +59,13 @@
 
     <script>
         $(document).ready(function(){
-            new DataTable('#datatable',{
-                "bPaginate": true,
+            console.log(window.location.pathname.split('/')[1])
+            $('#dataTable').DataTable({
                 "bInfo": false,
                 "scrollY": '70vh',
                 "scrollCollapse": true,
                 "scrollX": true,
-                //responsive:true
+                'responsive':true
             });
         });
 

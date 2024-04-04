@@ -6,7 +6,7 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionRepository implements PermissionInterface
 {
-    private $permission;
+    protected $permission;
 
     public function __construct(Permission $permission)
     {

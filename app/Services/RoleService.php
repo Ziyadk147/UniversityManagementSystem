@@ -6,7 +6,7 @@ use App\Repositories\RoleRepository;
 
 class RoleService{
 
-    private $roleRepository;
+    protected $roleRepository;
 
     public function __construct(RoleRepository $roleRepository)
     {
