@@ -18,6 +18,8 @@ Route::controller(\App\Http\Controllers\PermissionController::class)->prefix('/p
 });
 
 
+Route::resource('/announcement', \App\Http\Controllers\AnnouncementController::class);
 Route::resource('/permission' , \App\Http\Controllers\PermissionController::class);
 Route::resource('/role' , \App\Http\Controllers\RoleController::class);
 Route::resource('/user' , \App\Http\Controllers\UserController::class);
+
