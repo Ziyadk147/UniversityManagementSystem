@@ -9,7 +9,36 @@
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
+            @canany(['view-live-announcements' , 'view-historical-announcements'])
+            <div class="dropdown text-center">
+                <li class="nav-item">
+                    <a href="#announcements" class="nav-link" data-bs-toggle="collapse" >
+                        <i class="fa-solid fa-bell  text-primary text-sm opacity-10"></i>
+                        <span class="nav-link-text mx-3">Announcements</span>
+                    </a>
+                    <div class="collapse show" id="announcements">
+                        <ul class="nav nav-sm flex-column">
+                            @can('view-live-announcements')
+                                <li class="nav-item">
+                                    <a href="{{route('announcement.index')}}" class="nav-link">
+                                        <span class="nav-link-test">Live Announcements</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('view-historical-announcements')
+                                <li class="nav-item">
+                                    <a href="{{route('announcement.historical')}}" class="nav-link">
+                                        <span class="nav-link-text">Announcement Historical</span>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </div>
+                </li>
+            </div>
+            @endcanany
             @can('sidebar-view-dashboard')
+
             <li class="nav-item">
                 <a class="nav-link active" href="{{route('home')}}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -32,9 +61,9 @@
                         @canany(['sidebar-view-permissions	' , 'sidebar-view-roles'])
             <div class="dropdown text-center">
                 <li class="nav-item">
-                    <a href="#rolesandpermissions" class="nav-link" data-bs-toggle="collapse" aria-expanded="true" >
-                        <i class="fa-solid fa-arrows-to-circle"></i>
-                        <span class="sidenav- mx-3">Roles And Permissions</span>
+                    <a href="#rolesandpermissions" class="nav-link" data-bs-toggle="collapse" >
+                        <i class="fa-solid fa-arrows-to-circle  text-primary text-sm opacity-10"></i>
+                        <span class="nav-link-text mx-3">Roles And Permissions</span>
                     </a>
                     <div class="collapse show" id="rolesandpermissions">
                         <ul class="nav nav-sm flex-column">
@@ -57,6 +86,7 @@
                 </li>
             </div>
                 @endcanany
+
 {{--            <div class="dropdown">--}}
 {{--                <li class="nav-item ">--}}
 {{--                    <a class="nav-link" data-bs-toggle="collapse" aria-expanded="true" href="#warnWhiteList">--}}
