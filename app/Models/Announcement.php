@@ -11,4 +11,8 @@ class Announcement extends Model
 
     protected $fillable = ['text' , 'created_by' ,'created_by_name' ];
 
+    public function User()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
