@@ -34,7 +34,7 @@ class AnnouncementService
     {
         $payload = [
             'text' => $request->data,
-            'created_by' => Auth::id(),
+            'user_id' => Auth::id(),
             'created_by_name' => Auth::user()->name
         ];
         return $this->announcementRepository->storeAnnouncement($payload);

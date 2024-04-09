@@ -9,7 +9,7 @@ class Announcement extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['text' , 'created_by' ,'created_by_name' ];
+    protected $fillable = ['text' , 'user_id' ,'created_by_name' ];
 
     public function User()
     {
