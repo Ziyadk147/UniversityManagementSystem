@@ -16,6 +16,9 @@ Route::controller(\App\Http\Controllers\PermissionController::class)->prefix('/p
     Route::get('/get-role-binded-permissions/' , 'getPermissionBindedToRole')->name('permission.getRolePermissions');
     Route::post('/bind-permission-to-role' , 'bindPermissionToRole')->name('permission.bindPermission');
 });
+Route::controller(\App\Http\Controllers\AnnouncementController::class)->prefix('/announcement')->group(function(){
+    Route::get('/historical','historical')->name('announcement.historical');
+});
 
 
 Route::resource('/announcement', \App\Http\Controllers\AnnouncementController::class);

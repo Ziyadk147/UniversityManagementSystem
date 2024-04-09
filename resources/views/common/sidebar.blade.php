@@ -9,16 +9,34 @@
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
-            {{--                @can('sidebar-view-announcements')--}}
-            <li class="nav-item">
-                <a class="nav-link active" href="{{route('announcement.index')}}">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-solid fa-bell text-primary text-sm opacity-10"></i>
+            @canany(['view-live-announcements' , 'view-historical-announcements'])
+            <div class="dropdown text-center">
+                <li class="nav-item">
+                    <a href="#announcements" class="nav-link" data-bs-toggle="collapse" >
+                        <i class="fa-solid fa-bell  text-primary text-sm opacity-10"></i>
+                        <span class="nav-link-text mx-3">Announcements</span>
+                    </a>
+                    <div class="collapse show" id="announcements">
+                        <ul class="nav nav-sm flex-column">
+                            @can('view-live-announcements')
+                                <li class="nav-item">
+                                    <a href="{{route('announcement.index')}}" class="nav-link">
+                                        <span class="nav-link-test">Live Announcements</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('view-historical-announcements')
+                                <li class="nav-item">
+                                    <a href="{{route('announcement.historical')}}" class="nav-link">
+                                        <span class="nav-link-text">Announcement Historical</span>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
                     </div>
-                    <span class="nav-link-text ms-1">Announcements</span>
-                </a>
-            </li>
-            {{--                @endcan--}}
+                </li>
+            </div>
+            @endcanany
             @can('sidebar-view-dashboard')
 
             <li class="nav-item">
