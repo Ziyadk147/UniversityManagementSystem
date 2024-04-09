@@ -22,7 +22,7 @@
                                 <div class="card-body" id="announcementMessages">
                                     @foreach($announcements as $announcement)
 
-                                        <div class="row mb-6">
+                                        <div class="row mb-6 cardid">
                                             <div class="col">
                                                 <div class="card shadow-lg">
                                                     <div class="card-header  h-25 bg-primary m-0 text-white ">
@@ -66,7 +66,6 @@
     </div>
     <script>
         $(document).ready(function(){
-            let count = 0
             $("#sendButton").on('click' , function () {
                let textBox = $('#textBox').val();
                 $.ajax({
@@ -77,11 +76,12 @@
                         'data': textBox,
                     },
                     success:function (success) {
+                        let totalCards = $('#announcementMessages .cardid').length;
                         let created_by =success.data.created_by_name;
                         let text = success.data.text;
                         let created_at = success.data.created_at;
                         let html = `
-                                        <div class="row mb-6 new-card">
+                                        <div class="row mb-6 new-card cardid">
                                             <div class="col">
                                                 <div class="card shadow-lg">
                                                     <div class="card-header  h-25 bg-primary m-0 text-white ">
@@ -100,6 +100,11 @@
                                                 </div>
                                             </div>
                                         </div>`
+                            // $("#announcementMessages .row").first().remove();
+                        if(totalCards > 4){
+                            $("#announcementMessages .row").first().remove()
+                            console.log(totalCards);
+                        }
                         let newCard = $(html);
                         $("#announcementMessages").append(newCard);
                         $("#textBox").val(" ");
@@ -108,7 +113,6 @@
                             duration: 200, // Adjust duration as needed (in milliseconds)
                             easing: 'swing' // Choose easing function (e.g., 'swing', 'linear', 'easeInOut')
                         });
-                        count++;
                     }
                 })
             })
