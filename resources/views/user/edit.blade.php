@@ -33,6 +33,7 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <input type="hidden" name="flag" value="0">
                             </div>
                             <div class="col-md-4">
                                 <button type="submit" class="btn btn-sm btn-primary">Create</button>

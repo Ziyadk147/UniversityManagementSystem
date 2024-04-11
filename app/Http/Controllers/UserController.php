@@ -54,7 +54,10 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        return view('user.tempedit');
+        $payload['roles'] = $this->roleService->getAllRoles();
+        $payload['user'] = $this->userService->getUserById($id);
+        $payload['userRole'] = $this->userService->getUserRoles($payload['user']);
+        return view('user.tempedit' , $payload);
     }
 
     /**
@@ -71,10 +74,16 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserUpdateValidationRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
         $user = $this->userService->updateUser($request , $id);
-        return to_route('user.index');
+
+        if ($request->flag == 0 ){
+            return to_route('user.index');
+        }
+        else{
+            return to_route('home');
+        }
     }
 
     /**
