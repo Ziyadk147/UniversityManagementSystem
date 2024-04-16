@@ -25,6 +25,7 @@ class UserUpdateValidationRequest extends FormRequest
             'name' => 'required|string',
             'email' => 'required',
             'role' => 'required',
+            'image' => ''
         ];
     }
 }

@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Announcement extends Model
+class Images extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['text' , 'user_id' ,'created_by_name' ];
+    protected $fillable = ['filename'];
 
     public function User()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Images::class);
     }
+
 }

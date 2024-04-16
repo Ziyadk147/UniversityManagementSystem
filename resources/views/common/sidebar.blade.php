@@ -86,36 +86,13 @@
                 </li>
             </div>
                 @endcanany
-
-{{--            <div class="dropdown">--}}
-{{--                <li class="nav-item ">--}}
-{{--                    <a class="nav-link" data-bs-toggle="collapse" aria-expanded="true" href="#warnWhiteList">--}}
-{{--                        <i class="fa-solid fa-arrows-to-circle"></i>--}}
-{{--                        <span class="sidenav-normal dropdown-toggle">WhiteList</span>--}}
-{{--                    </a>--}}
-{{--                    <div class="collapse show" id="warnWhiteList" style="">--}}
-{{--                        <ul class="nav nav-sm flex-column">--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link" href="https://dashboard.x-alert.network/x-warning/white-listing-live">--}}
-{{--                                    <span class="nav-link-text">Live</span>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link" href="https://dashboard.x-alert.network/x-warning/white-listing-historical">--}}
-{{--                                    <span class="nav-link-text">Historical</span>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </div>--}}
-{{--                </li>--}}
-{{--            </div>--}}
         </ul>
     </div>
     <div class="sidenav-footer hr-blurry">
 
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link active" href="">
+                <a class="nav-link active" href="{{route('user.show' , \Illuminate\Support\Facades\Auth::id())}}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fa fa-solid fa-user mb-1 text-primary text-sm opacity-10"></i>
                     </div>

@@ -15,6 +15,7 @@ interface UserInterface
 
     public function updateUser($payload ,$role , $id);
 
+    public function updateUserProfile($payload, $image , $id);
     public function destroyUser($id);
 
 }
