@@ -20,6 +20,10 @@ Route::controller(\App\Http\Controllers\AnnouncementController::class)->prefix('
     Route::get('/historical','historical')->name('announcement.historical');
 });
 
+Route::controller(\App\Http\Controllers\UserController::class)->prefix('/user')->group(function() {
+    Route::put('/profile' , 'updateProfile')->name('user.profileUpdate');
+});
+
 
 Route::resource('/announcement', \App\Http\Controllers\AnnouncementController::class);
 Route::resource('/permission' , \App\Http\Controllers\PermissionController::class);

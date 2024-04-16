@@ -4,8 +4,11 @@ namespace App\Repositories;
 
 
 use App\Interfaces\UserInterface;
+use App\Models\Images;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class UserRepository implements  UserInterface{
 
@@ -31,13 +34,42 @@ class UserRepository implements  UserInterface{
             });
     }
 
-    public function updateUser($payload, $role, $id)
+    public function updateUser($payload ,$role, $id)
     {
-        DB::transaction(function() use($payload , $role ,$id){
+        DB::transaction(function() use($payload  , $role ,$id){
            $user = $this->getUserById($id);
+
            $user->update($payload);
 
            $user->syncRoles($role);
+        });
+
+    }
+
+    public function updateUserProfile($payload , $image , $id)
+    {
+        DB::transaction(function() use($payload , $image , $id){
+           $user = $this->getUserById($id);
+
+           $user->update($payload);
+
+           if ($image){
+
+               if($user->image){
+                   Images::where('user_id' ,$id)->delete();
+
+               }
+
+               $user->Image()->create([
+
+                   'filename' => $image,
+
+               ]);
+
+           }
+
+           return $user;
+
         });
     }
 

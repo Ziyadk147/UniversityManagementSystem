@@ -26,8 +26,11 @@ class UserController extends Controller
     public function index()
     {
         $payload['users'] = $this->userService->getAllUsers();
-
+        foreach ($payload['users'] as $key => $user){
+            $payload['userRoles'][$key] = $this->userService->getUserRoles($user);
+        }
         return view('user.index' , $payload);
+
     }
 
     /**
@@ -76,19 +79,22 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
         $user = $this->userService->updateUser($request , $id);
 
-        if ($request->flag == 0 ){
             return to_route('user.index');
-        }
-        else{
-            return to_route('home');
-        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
+    public function updateProfile(Request $request )
+    {
+        $id = $request->id;
+        $user = $this->userService->profileUpdate($request , $id);
+        return to_route('home');
+
+    }
     public function destroy(string $id)
     {
         $this->userService->destroyUser($id);

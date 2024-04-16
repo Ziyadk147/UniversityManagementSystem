@@ -34,7 +34,7 @@
                                 <tr>
                                     <td>{{$user->id}}</td>
                                     <td>{{$user->name}}</td>
-                                    <td>{{$user->roles->toArray()[0]['name']}}</td>
+                                    <td>{{$userRoles[$key]}}</td>
                                     <td>
                                         <a href="{{route('user.edit',$user->id)}}">
                                             <button class="btn btn-sm btn-primary">Edit</button>
