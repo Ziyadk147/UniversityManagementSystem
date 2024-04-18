@@ -29,4 +29,4 @@ Route::resource('/announcement', \App\Http\Controllers\AnnouncementController::c
 Route::resource('/permission' , \App\Http\Controllers\PermissionController::class);
 Route::resource('/role' , \App\Http\Controllers\RoleController::class);
 Route::resource('/user' , \App\Http\Controllers\UserController::class);
-
+Route::resource('/course' , \App\Http\Controllers\CourseController::class);
