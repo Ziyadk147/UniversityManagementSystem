@@ -30,3 +30,4 @@ Route::resource('/permission' , \App\Http\Controllers\PermissionController::clas
 Route::resource('/role' , \App\Http\Controllers\RoleController::class);
 Route::resource('/user' , \App\Http\Controllers\UserController::class);
 Route::resource('/course' , \App\Http\Controllers\CourseController::class);
+Route::resource('/material' , \App\Http\Controllers\MaterialController::class);
