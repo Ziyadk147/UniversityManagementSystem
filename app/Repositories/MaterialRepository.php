@@ -4,7 +4,7 @@
 namespace App\Repositories;
 
 use App\Interfaces\MaterialInterface;
-use App\Models\Material;
+use App\    Models\Material;
 use Illuminate\Support\Facades\DB;
 
 class MaterialRepository implements MaterialInterface{
@@ -27,9 +27,10 @@ class MaterialRepository implements MaterialInterface{
 
         $name = $payload['name'];
 
-        $filename = $this->storeFile($file , $course->name);
 
-        DB::transaction(function () use($course, $filename ,$name){
+        DB::transaction(function () use($course, $file ,$name){
+
+            $filename = $this->storeFile($file , $course->name);
 
             $course->Material()->create([
 
@@ -44,12 +45,17 @@ class MaterialRepository implements MaterialInterface{
     {
 
         $course = $payload['course'];
-        return $course->Material;
 
+        return $course->Material;
     }
 
+    public function getMaterialById($id)
+    {
+        return $this->material->find($id);
+    }
     public function storeFile($file , $coursename)
     {
+
         $file = $file->store('files/'.$coursename.'/','public');
         $filePath = basename($file);
         return $filePath;

@@ -7,6 +7,7 @@ use App\Models\Material;
 use App\Services\CourseService;
 use App\Services\MaterialService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MaterialController extends Controller
 {
@@ -58,15 +59,25 @@ class MaterialController extends Controller
     public function show($id)
     {
         $material = $this->materialService->getMaterialsByCourseId($id);
-        return view('material.index' , compact('material'));
+        $course = $this->courseService->findCourseById($id);
+        $payload['materials'] = $material;
+        $payload['courses'] = $course;
+        return view('material.index' , $payload);
     }
 
+
+    public function downloadFile($id)
+    {
+        $material = $this->materialService->getMaterialById($id);
+        $course = $this->courseService->findCourseById($material->course_id);
+        return Storage::disk('public')->download('files/'.$course->name.'/'.$material->filename);
+    }
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Material $material)
     {
-        //
+        return view('material.edit' , $material);
     }
 
     /**

@@ -24,6 +24,10 @@ class MaterialService {
         return $this->materialRepository->storeMaterial($payload);
      }
 
+    public function getMaterialById($id)
+    {
+        return $this->materialRepository->getMaterialById($id);
+    }
     public function getMaterialsByCourseId($id)
     {
         $payload['course'] = $this->courseRepository->findCourseById($id);

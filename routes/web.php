@@ -24,6 +24,9 @@ Route::controller(\App\Http\Controllers\UserController::class)->prefix('/user')-
     Route::put('/profile' , 'updateProfile')->name('user.profileUpdate');
 });
 
+Route::controller(\App\Http\Controllers\MaterialController::class)->prefix('/material')->group(function(){
+    Route::get('/download/{id}' , 'downloadFile')->name('material.download');
+});
 
 Route::resource('/announcement', \App\Http\Controllers\AnnouncementController::class);
 Route::resource('/permission' , \App\Http\Controllers\PermissionController::class);
