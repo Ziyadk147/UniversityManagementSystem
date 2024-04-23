@@ -67,6 +67,7 @@ class UserService
         $image = $image->store('images/userImages/'.Auth::id().'/' , 'public');
         $imagePath = basename($image);
         return $imagePath;
+
     }
     public function getUserById($id)
     {

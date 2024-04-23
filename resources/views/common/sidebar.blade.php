@@ -58,6 +58,26 @@
                 </a>
             </li>
             @endcan
+            @can('sidebar-view-courses')
+            <li class="nav-item">
+                <a class="nav-link active" href="{{route('course.index')}}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-solid fa-book text-primary text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Courses</span>
+                </a>
+            </li>
+            @endcan
+            @can('sidebar-view-materials')
+            <li class="nav-item">
+                <a class="nav-link active" href="{{route('material.index')}}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-solid fa-book text-primary text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Materials</span>
+                </a>
+            </li>
+            @endcan
                         @canany(['sidebar-view-permissions	' , 'sidebar-view-roles'])
             <div class="dropdown text-center">
                 <li class="nav-item">

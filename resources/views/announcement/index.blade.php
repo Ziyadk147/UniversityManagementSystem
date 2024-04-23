@@ -21,7 +21,6 @@
                             <div class="card bg-gray-100">
                                 <div class="card-body" id="announcementMessages">
                                     @foreach($announcements as $announcement)
-
                                         <div class="row mb-6 cardid">
                                             <div class="col">
                                                 <div class="card shadow-lg">
