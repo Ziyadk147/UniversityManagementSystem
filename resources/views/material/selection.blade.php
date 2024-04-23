@@ -18,7 +18,7 @@
                 <div class="card-body">
                     @foreach($courses as $course)
                         <div class="row ">
-                            <div class="col-4 ">
+                            <div class="col m-2 ">
                                 <a href="{{route('material.show' , $course->id)}}">
                                     <div class="card shadow ">
                                         <div class="card-header coursecard">

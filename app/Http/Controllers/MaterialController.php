@@ -77,22 +77,29 @@ class MaterialController extends Controller
      */
     public function edit(Material $material)
     {
-        return view('material.edit' , $material);
+        $payload['courses']  = $this->courseService->getAllCourses();
+        $payload['material'] = $material;
+
+        return view('material.edit' , $payload);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Material $material)
+    public function update(Request $request, $id)
     {
-        //
+        $payload['material'] = $this->materialService->updateMaterial($request , $id);
+//        $payload['course'] = $this->courseService->findCourseById($payload['material']->course_id);
+        return to_route('material.index' , $payload);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Material $material)
+    public function destroy($id)
     {
-        //
+        $course_id = $this->materialService->destroyMaterial($id);
+
+        return to_route('material.index' );
     }
 }

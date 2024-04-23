@@ -11,4 +11,7 @@ interface MaterialInterface{
     public function getMaterialsByCourseId($payload);
     public function storeFile($file , $coursename);
 
+    public function updateMaterial($request  , $course , $material , $file);
+
+    public function destroyMaterial($material , $course);
 }

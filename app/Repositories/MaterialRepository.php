@@ -4,8 +4,11 @@
 namespace App\Repositories;
 
 use App\Interfaces\MaterialInterface;
-use App\    Models\Material;
+use App\Models\Material;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use SebastianBergmann\Type\FalseType;
 
 class MaterialRepository implements MaterialInterface{
 
@@ -35,6 +38,7 @@ class MaterialRepository implements MaterialInterface{
             $course->Material()->create([
 
                 'filename' => $filename,
+
                 'name' => $name,
 
             ]);
@@ -57,9 +61,46 @@ class MaterialRepository implements MaterialInterface{
     {
 
         $file = $file->store('files/'.$coursename.'/','public');
+
         $filePath = basename($file);
+
         return $filePath;
 
     }
 
+    public function updateMaterial($request , $course , $material , $file)
+    {
+        DB::transaction(function() use($request , $course , $material , $file){
+
+            $this->deleteFile($course->Material->toArray()[0]['filename'] , $course->name);
+
+            $filename =  $this->storeFile($file, $course->name);
+
+            $material->update([
+               'filename' => $filename,
+            ]);
+            return $course->Material;
+        });
+
+    }
+
+    public function deleteFile($file , $coursename)
+    {
+      if(Storage::disk('public')->delete('files/'.$coursename.'/'.$file)){
+        return true;
+      }
+      else{
+          throw new \Error('File Not Deleted');
+      }
+
+    }
+
+    public function destroyMaterial($material , $course)
+    {
+        DB::transaction(function() use($material ,$course){
+            $this->deleteFile($material->filename , $course->name);
+            $material->delete();
+            return $course->id; //returning course id to get back to the courses page
+        });
+    }
 }

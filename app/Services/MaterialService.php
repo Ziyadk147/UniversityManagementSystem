@@ -34,5 +34,21 @@ class MaterialService {
         return $this->materialRepository->getMaterialsByCourseId($payload);
     }
 
+    public function updateMaterial($request , $id)
+    {
+        $material = $this->getMaterialById($id);
+        $course = $this->courseRepository->findCourseById($material->course_id);
+        $file = $request->file('file');
+        return $this->materialRepository->updateMaterial($request  , $course , $material , $file);
+    }
+
+    public function destroyMaterial($id)
+    {
+        $material = $this->getMaterialById($id);
+        $course = $this->courseRepository->findCourseById($material->course_id);
+
+        return $this->materialRepository->destroyMaterial($material , $course);
+    }
 
 }
+
