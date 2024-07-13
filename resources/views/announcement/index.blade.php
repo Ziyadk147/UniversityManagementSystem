@@ -48,13 +48,14 @@
 
                         <div class="col-lg-6 mt-4 w-lg-100">
                             <div class="row">
-
+                                    @can("create-announcement")
                                     <div class="col-lg-11">
                                         <input type="text" class=" p-2 input-group" id="textBox" placeholder=" Enter a message">
                                     </div>
                                     <div class="col-lg-1">
                                         <button class="btn btn-primary" id="sendButton">Send</button>
                                     </div>
+                                @endcan
                             </div>
                         </div>
                     </div>

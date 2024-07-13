@@ -10,10 +10,12 @@
                             <h2 class="m-0 font-weight-bold text-primary">Permissions</h2>
                         </div>
                         <div class="col-sm-6 text-right">
-
+                            @can("create-permission")
                             <a href="{{route('permission.create')}}"><button class="btn btn-primary btn-sm">Create New Permission</button></a>
+                            @endcan
+                            @can("bind-permission")
                             <a href="{{route('permission.bind')}}"><button class="btn btn-primary btn-sm">Bind Permission To Role</button></a>
-
+                                @endcan
                         </div>
                     </div>
                 </div>
@@ -24,8 +26,12 @@
                             <tr>
                                 <th>ID</th>
                                 <th>permission</th>
+                                @can("edit-permission")
                                 <th>Edit</th>
+                                @endcan
+                                @can("delete-permission")
                                 <th>Delete</th>
+                                @endcan
                             </tr>
                             </thead>
                             <tbody>
@@ -34,11 +40,17 @@
                                 <tr>
                                     <td>{{$permission->id}}</td>
                                     <td>{{$permission->name}}</td>
+                                    @can("edit-permission")
+
                                     <td>
                                             <a href="{{route('permission.edit',$permission->id)}}">
                                                 <button class="btn btn-sm btn-primary">Edit</button>
                                             </a>
                                     </td>
+                                    @endcan
+
+                                        @can("delete-permission")
+
                                     <td>
                                         <form action="{{route('permission.destroy' , $permission->id)}}" method="post">
                                             @method('DELETE')
@@ -46,6 +58,8 @@
                                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                         </form>
                                     </td>
+                                    @endcan
+
                                 </tr>
                             @endforeach
                             </tbody>

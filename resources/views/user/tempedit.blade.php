@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <div class="row justify-content-center align-items-center">
                         <div class="col-mt-3 text-center">
-                            <img src="{{asset('/storage/images/userImages/'.\Illuminate\Support\Facades\Auth::id().'/'.$user->Image->filename)}}" class="img img-thumbnail shadow-xl border-radius-2xl border-5">
+                            <img src="@if($user->Image == null) @else{{asset('/storage/images/userImages/'.\Illuminate\Support\Facades\Auth::id().'/'.$user->Image->filename ?? null)}}@endif" class="img img-thumbnail shadow-xl border-radius-2xl border-5">
                         </div>
                         <div class="col-mt-3">
                             <form action="{{route('user.profileUpdate')}}" method="POST" enctype="multipart/form-data">

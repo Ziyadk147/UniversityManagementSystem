@@ -10,9 +10,11 @@
                         <div class="col">
                             <h2 class="m-0 text-primary font-weight-bold">Materials</h2>
                         </div>
+                        @can("create-material")
                         <div class="col">
                             <a href="{{route('material.create')}}"><button class="btn btn-primary">Add a Material</button></a>
                         </div>
+                        @endcan
                     </div>
                 </div>
                 <div class="card-body">

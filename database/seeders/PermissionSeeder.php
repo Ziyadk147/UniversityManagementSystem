@@ -13,6 +13,8 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
+
+
         $permissions = [
             "view-live-announcements",
             "view-historical-announcements",
@@ -21,9 +23,27 @@ class PermissionSeeder extends Seeder
             "sidebar-view-courses",
             "sidebar-view-materials",
             "sidebar-view-permissions",
-
             "sidebar-view-roles",
+            "create-course",
+            "edit-course",
+            "delete-course",
+            "create-material",
+            "edit-material",
+            "delete-material",
+            "create-user",
+            "edit-user",
+            "delete-user",
+            "create-permission",
+            "edit-permission",
+            "delete-permission",
+            "bind-permission",
+            "create-role",
+            "edit-role",
+            "delete-role",
+            "create-announcement",
         ];
+
+
         foreach ($permissions as $permission) {
             Permission::create(
                 [

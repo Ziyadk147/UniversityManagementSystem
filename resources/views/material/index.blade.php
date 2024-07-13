@@ -20,8 +20,12 @@
                                 <th>Title</th>
                                 <th>File Name</th>
                                 <th>Download</th>
+                                @can("edit-material")
                                 <th>Edit</th>
+                                @endcan
+                                @can("edit-delete")
                                 <th>Delete</th>
+                                @endcan
                             </tr>
                             </thead>
                             <tbody>
@@ -35,18 +39,27 @@
                                                 <button class="btn btn-sm btn-primary"><i class="fa-solid fa-download pr-3"></i>    Download</button>
                                             </a>
                                         </td>
+                                        @can("edit-material")
+
                                         <td>
                                             <a href="{{route('material.edit',$material->id)}}">
                                                 <button class="btn btn-sm btn-primary">Edit</button>
                                             </a>
                                         </td>
+                                        @endcan
+
+                                            @can("delete-material")
+
                                         <td>
                                             <form action="{{route('material.destroy' , $material->id)}}" method="post">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                             </form>
+
                                         </td>
+                                        @endcan
+
                                     </tr>
                                 @endforeach
                             </tbody>

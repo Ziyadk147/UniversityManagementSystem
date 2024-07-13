@@ -10,7 +10,9 @@
                             <h2 class="m-0 font-weight-bold text-primary">Roles</h2>
                         </div>
                         <div class="col-sm-4 text-right">
+                            @can("create-role")
                             <a href="{{route('role.create')}}"><button class="btn btn-primary btn-sm">Create New Role</button></a>
+                            @endcan
                         </div>
                     </div>
                 </div>
@@ -21,8 +23,12 @@
                             <tr>
                                 <th>ID</th>
                                 <th>role</th>
+                                @can("edit-role")
                                 <th>Edit</th>
+                                @endcan
+                                @can("delete-role")
                                 <th>Delete</th>
+                                @endcan
                             </tr>
                             </thead>
                             <tbody>
