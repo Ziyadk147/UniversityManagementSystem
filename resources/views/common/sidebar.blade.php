@@ -78,7 +78,7 @@
                 </a>
             </li>
             @endcan
-                        @canany(['sidebar-view-permissions	' , 'sidebar-view-roles'])
+             @canany(['sidebar-view-permissions	' , 'sidebar-view-roles'])
             <div class="dropdown text-center">
                 <li class="nav-item">
                     <a href="#rolesandpermissions" class="nav-link" data-bs-toggle="collapse" >
@@ -87,14 +87,14 @@
                     </a>
                     <div class="collapse show" id="rolesandpermissions">
                         <ul class="nav nav-sm flex-column">
-                            @can('view-permissions')
+                            @can('sidebar-view-permissions')
                             <li class="nav-item">
                                 <a href="{{route('permission.index')}}" class="nav-link">
                                     <span class="nav-link-test">Permissions</span>
                                 </a>
                             </li>
                             @endcan
-                            @can('view-roles')
+                            @can('sidebar-view-roles')
                             <li class="nav-item">
                                 <a href="{{route('role.index')}}" class="nav-link">
                                     <span class="nav-link-text">Roles</span>
