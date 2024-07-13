@@ -41,6 +41,8 @@ class PermissionSeeder extends Seeder
             "edit-role",
             "delete-role",
             "create-announcement",
+            "sidebar-view-attendance",
+
         ];
 
 
