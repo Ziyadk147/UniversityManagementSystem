@@ -4,17 +4,21 @@ namespace App\Repositories;
 
 
 use App\Interfaces\UserInterface;
+use App\Models\Admin;
 use App\Models\Images;
+use App\Models\Student;
 use App\Models\User;
+use app\services\StudentService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Nette\Utils\Image;
 
 class UserRepository implements  UserInterface{
 
     protected $user;
 
-    public function __construct(User $user)
+    public function __construct(User $user )
     {
         $this->user = $user;
     }
@@ -29,7 +33,24 @@ class UserRepository implements  UserInterface{
         DB::transaction(function() use($data , $role){
 
             $createdUser = $this->user->create($data);
+
             $createdUser->assignRole($role);
+
+            if($role->name == "student"){
+
+                Student::create([
+
+                    'user_id' => $createdUser->id
+
+                ]);
+
+            }
+            elseif ($role->name == "admin"){
+                $admin = Admin::create([
+                    "user_id" => $createdUser->id
+                ]);
+            }
+
             return $createdUser;
             });
     }
@@ -42,6 +63,49 @@ class UserRepository implements  UserInterface{
            $user->update($payload);
 
            $user->syncRoles($role);
+
+           $student = Student::where('user_id', $user->id)->first();
+           $admin = Admin::where("user_id" , $user->id)->first();
+//TODO://Refactor later
+           if($role->name == "admin"){
+
+
+               if($student != null){
+
+                    $student->delete();
+
+                }
+                if($admin != null){
+
+                   $admin->update([
+                       "user_id" => $user->id
+                   ]);
+
+                }
+                else{
+                    Admin::create([
+                        'user_id' => $user->id
+                    ]);
+                }
+
+           }
+           else{
+                if($student != null){
+                    $student->update([
+                        'user_id' => $user->id
+                    ]);
+                }
+                else{
+                    Student::create([
+                        "user_id" => $user->id
+                    ]);
+                }
+                if($admin != null){
+                    $admin->delete();
+                }
+
+           }
+
         });
 
     }
@@ -84,7 +148,26 @@ class UserRepository implements  UserInterface{
 
     public function destroyUser($id)
     {
-        $user = $this->getUserById($id);
-        $user->delete();
+        DB::transaction(function() use($id){
+            $user = $this->getUserById($id);
+
+            $student = Student::where('user_id', $user->id)->first() ;
+            $image = Images::where("user_id" , $user->id)->first()  ;
+            $admin = Admin::where("user_id" , $user->id)->first()  ;
+
+            if($student != null){
+                $student->delete();
+            }
+            if($image != null){
+                $image->delete();
+            }
+            if($admin != null){
+                $admin->delete();
+            }
+
+            $user->delete();
+
+        });
+
     }
 }
