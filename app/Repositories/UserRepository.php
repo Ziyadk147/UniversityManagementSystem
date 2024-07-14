@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 
 use App\Interfaces\UserInterface;
+use App\Models\Admin;
 use App\Models\Images;
 use App\Models\Student;
 use App\Models\User;
@@ -44,6 +45,12 @@ class UserRepository implements  UserInterface{
                 ]);
 
             }
+            elseif ($role->name == "admin"){
+                $admin = Admin::create([
+                    "user_id" => $createdUser->id
+                ]);
+            }
+
             return $createdUser;
             });
     }
@@ -58,14 +65,29 @@ class UserRepository implements  UserInterface{
            $user->syncRoles($role);
 
            $student = Student::where('user_id', $user->id)->first();
+           $admin = Admin::where("user_id" , $user->id)->first();
+//TODO://Refactor later
+           if($role->name == "admin"){
 
-           if($role->name != "student"){
 
-                if($student != null){
+               if($student != null){
 
                     $student->delete();
 
                 }
+                if($admin != null){
+
+                   $admin->update([
+                       "user_id" => $user->id
+                   ]);
+
+                }
+                else{
+                    Admin::create([
+                        'user_id' => $user->id
+                    ]);
+                }
+
            }
            else{
                 if($student != null){
@@ -77,6 +99,9 @@ class UserRepository implements  UserInterface{
                     Student::create([
                         "user_id" => $user->id
                     ]);
+                }
+                if($admin != null){
+                    $admin->delete();
                 }
 
            }
@@ -128,12 +153,16 @@ class UserRepository implements  UserInterface{
 
             $student = Student::where('user_id', $user->id)->first() ;
             $image = Images::where("user_id" , $user->id)->first()  ;
+            $admin = Admin::where("user_id" , $user->id)->first()  ;
 
             if($student != null){
                 $student->delete();
             }
             if($image != null){
                 $image->delete();
+            }
+            if($admin != null){
+                $admin->delete();
             }
 
             $user->delete();

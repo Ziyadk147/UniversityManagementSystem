@@ -61,4 +61,9 @@ class User extends Authenticatable
         return $this->hasOne(Student::class );
     }
 
+    public function Admin()
+    {
+        return $this->hasOne(Admin::class);
+    }
+
 }
