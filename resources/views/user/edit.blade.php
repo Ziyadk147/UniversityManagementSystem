@@ -29,7 +29,7 @@
                                     <select class="form-select" aria-label="Default select example" name="role" id="roledropdown">
                                         <option selected disabled>Select a Role</option>
                                         @foreach($roles as $role)
-                                            <option   @if($userRole[0] ?? null == $role->name) selected @endif  value="{{$role->id}}">{{$role->name}}</option>
+                                            <option   @if($userRole[0] != null  && $userRole[0] == $role->name) selected @endif  value="{{$role->id}}">{{$role->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -17,4 +17,8 @@ class Course extends Model
     {
         return $this->hasMany(Material::class);
     }
+
+    public function Student(){
+        return $this->hasMany(Student::class , 'course_id' , "user_id" );
+    }
 }

@@ -13,6 +13,8 @@ return [
     App\Providers\PermissionServiceProvider::class,
     App\Providers\RoleInterfaceServiceProvider::class,
     App\Providers\RoleServiceProvider::class,
+    App\Providers\StudentInterfaceServiceProvider::class,
+    App\Providers\StudentServiceProvider::class,
     App\Providers\UserInterfaceServiceProvider::class,
     App\Providers\UserServiceProvider::class,
 ];
