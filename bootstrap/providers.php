@@ -5,6 +5,8 @@ return [
     App\Providers\AnnouncementInterfaceServiceProvider::class,
     App\Providers\AnnouncementServiceProvider::class,
     App\Providers\AppServiceProvider::class,
+    App\Providers\ClassInterfaceServiceProvider::class,
+    App\Providers\ClassServiceProvider::class,
     App\Providers\CourseInterfaceServiceProvider::class,
     App\Providers\CourseServiceProvider::class,
     App\Providers\MaterialInterfaceServiceProvider::class,
