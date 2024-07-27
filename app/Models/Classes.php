@@ -20,10 +20,13 @@ class Classes extends Model
     public function Student()
     {
 
-        return $this->hasAppended(Student::class);
+        return $this->hasMany(Student::class);
 
     }
 
 
-
+    public function Course()
+    {
+        return $this->belongsToMany(Course::class , 'class_courses' , 'class_id' , 'course_id');
+    }
 }

@@ -8,4 +8,9 @@ interface ClassInterface
 
 
     public function storeClass($data);
+
+    public function getClassCourses($id);
+
+    public function bindCourseToClass($data);
+
 }

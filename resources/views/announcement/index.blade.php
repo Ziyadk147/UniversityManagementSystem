@@ -66,6 +66,7 @@
     </div>
     <script>
         $(document).ready(function(){
+
             $("#sendButton").on('click' , function () {
                let textBox = $('#textBox').val();
                 $.ajax({

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 
+use App\Models\Course;
 use App\Repositories\CourseRepository;
 
 class CourseService{
@@ -33,6 +34,11 @@ class CourseService{
         return $this->courseRepository->findCourseById($id);
 
     }
+
+    public function getCourseClasses(Course $course){
+        return $this->courseRepository->getCourseClasses($course);
+    }
+
 
     public function updateCourse($request , $id)
     {

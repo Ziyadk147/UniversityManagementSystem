@@ -28,6 +28,13 @@ Route::controller(\App\Http\Controllers\MaterialController::class)->prefix('/mat
     Route::get('/download/{id}' , 'downloadFile')->name('material.download');
 });
 
+Route::controller(\App\Http\Controllers\ClassesController::class)->prefix('/class')->group(function(){
+    Route::get('/bind' , 'bindCourseToClass')->name('class.bind');
+    Route::post("/bind-store" , "bindStore")->name('class.bindStore');
+    Route::post("/get-class-courses" , "getCourses")->name("class.getCourses"); 
+});
+
+
 Route::resource('/announcement', \App\Http\Controllers\AnnouncementController::class);
 Route::resource('/permission' , \App\Http\Controllers\PermissionController::class);
 Route::resource('/role' , \App\Http\Controllers\RoleController::class);
@@ -35,3 +42,6 @@ Route::resource('/user' , \App\Http\Controllers\UserController::class);
 Route::resource('/course' , \App\Http\Controllers\CourseController::class);
 Route::resource('/material' , \App\Http\Controllers\MaterialController::class);
 Route::resource('/class' , \App\Http\Controllers\ClassesController::class);
+
+
+

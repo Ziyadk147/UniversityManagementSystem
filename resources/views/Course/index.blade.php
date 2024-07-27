@@ -23,6 +23,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>name</th>
+                                <th>Show</th>
                                 @can('edit-course')
                                 <th>Edit</th>
                                 @endcan
@@ -37,6 +38,14 @@
                                     <td>{{$course->id}}</td>
 
                                     <td>{{$course->name}}</td>
+                                    <td>
+                                        <a href="{{route("course.show" , $course->id)}}">
+                                            <button class="btn btn-info btn-sm">
+                                                Show Classes
+                                            </button>
+                                        </a>
+                                    </td>
+                                    
                                     @can('edit-course')
 
                                     <td>
