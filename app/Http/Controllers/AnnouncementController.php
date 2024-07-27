@@ -43,8 +43,10 @@ class AnnouncementController extends Controller
      */
     public function store(Request $request)
     {
+
         $announcement = $this->announcementService->storeAnnouncement($request);
         return response(['status' => 200 , 'data' => $announcement]);
+
     }
 
     /**

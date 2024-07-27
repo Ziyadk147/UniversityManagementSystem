@@ -48,7 +48,12 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        //
+        
+        $payload['classes'] = $this->courseService->getCourseClasses($course);
+        $payload['course'] = $course;
+
+        return view("course.show" , $payload);
+    
     }
 
     /**

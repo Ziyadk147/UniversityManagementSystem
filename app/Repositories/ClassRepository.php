@@ -37,4 +37,21 @@ class ClassRepository implements ClassInterface
         return $class->update($payload);
 
     }
+
+    public function getClassCourses($id)
+    {
+        $class = $this->getClassById($id);
+        $payload["class"] = $class;
+        $payload["courses"] = $class->Course;
+        return $payload;
+
+    }
+
+    public function bindCourseToClass($data)
+    {
+//        dd($data);
+        $class = $this->getClassById($data->class);
+        return $class->Course()->sync($data->course);
+    }
+
 }

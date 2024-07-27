@@ -21,6 +21,8 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="{{asset('theme/assets/css/argon-dashboard.css?v=2.0.4')}}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.bootstrap5.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -70,6 +72,7 @@
 <script src="{{asset('theme/assets/js/core/bootstrap.min.js')}}"></script>
 <script src="{{asset('theme/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
     <script src="{{asset('theme/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{asset('theme/assets/js/plugins/chartjs.min.js')}}"></script>
     <script>
         var ctx1 = document.getElementById("chart-line").getContext("2d");

@@ -30,6 +30,10 @@ class CourseRepository implements  CourseInterface{
         return $this->course->find($id);
     }
 
+
+    public function getCourseClasses(Course $course){
+        return $course->Class;
+    }
     public function updateCourse($payload)
     {
         $course = $payload['course'];

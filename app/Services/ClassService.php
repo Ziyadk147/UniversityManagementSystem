@@ -44,4 +44,15 @@ class ClassService
 
         return $this->classRepository->updateClass($payload , $class);
     }
+
+
+    public function getClassCourses($id)
+    {
+        return $this->classRepository->getClassCourses($id);
+    }
+
+    public function bindCourseToClass($data)
+    {
+        return $this->classRepository->bindCourseToClass($data);
+    }
 }

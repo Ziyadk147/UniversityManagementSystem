@@ -4,16 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Classes;
 use App\Services\ClassService;
+use App\Services\CourseService;
 use Illuminate\Http\Request;
 
 class ClassesController extends Controller
 {
-    protected $classService;
+    protected $classService , $courseService;
 
 
-    public function __construct(ClassService $classService)
+    public function __construct(ClassService $classService , CourseService $courseService)
     {
         $this->classService  = $classService;
+        $this->courseService = $courseService;
     }
 
     /**
@@ -49,9 +51,12 @@ class ClassesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Classes $classes)
+    public function show($id)
     {
-        //
+        $payload= $this->classService->getClassCourses($id);
+
+
+        return view('class.show' , $payload);
     }
 
     /**
@@ -74,6 +79,30 @@ class ClassesController extends Controller
         $class = $this->classService->updateClass($request , $id);
 
         return to_route('class.index')->with("success" , "class updated successfully");
+    }
+
+    public function bindCourseToClass()
+    {
+        $payload['classes'] = $this->classService->getAllClasses();
+        $payload['courses'] = $this->courseService->getAllCourses();
+
+
+        return view("class.bind" , $payload) ;
+    }
+
+    public function bindStore(Request $request)
+    {
+            $this->classService->bindCourseToClass($request);
+            return to_route('class.index');
+    }
+
+    public function getCourses(Request $request){
+
+        $classId = $request->class_id;
+        $courses = $this->classService->getClassCourses($classId);
+
+        return response($courses , 200);
+
     }
 
     /**
