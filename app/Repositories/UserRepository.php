@@ -30,6 +30,7 @@ class UserRepository implements  UserInterface{
 
     public function storeUser($data , $role)
     {
+//        dd($data);
         DB::transaction(function() use($data , $role){
 
             $createdUser = $this->user->create($data);
@@ -40,8 +41,8 @@ class UserRepository implements  UserInterface{
 
                 Student::create([
 
-                    'user_id' => $createdUser->id
-
+                    'user_id' => $createdUser->id,
+                    "class_id" => $data['class']
                 ]);
 
             }
@@ -92,12 +93,14 @@ class UserRepository implements  UserInterface{
            else{
                 if($student != null){
                     $student->update([
-                        'user_id' => $user->id
+                        'user_id' => $user->id ,
+                         'class_id' => $payload['class'],
                     ]);
                 }
                 else{
                     Student::create([
-                        "user_id" => $user->id
+                        "user_id" => $user->id,
+                        'class_id' => $payload['class'],
                     ]);
                 }
                 if($admin != null){

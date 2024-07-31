@@ -28,14 +28,17 @@
                                         <label for="" class="form-control-label">Password</label>
                                         <input type="password" class="form-control" name="password">
                                     </div>
-                                    <div class="mb-5">
+                                    <div class="mb-3">
                                         <label for="" class="form-control-label">Role</label>
-                                        <select class="form-select" aria-label="Default select example" name="role" id="roledropdown">
+                                        <select class="form-select role" aria-label="Default select example" name="role" id="role">
                                             <option selected disabled>Select a Role</option>
                                             @foreach($roles as $role)
                                                 <option value="{{$role->id}}">{{$role->name}}</option>
                                             @endforeach
                                         </select>
+                                    </div>
+                                    <div class="mb-5" id="classInput">
+
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -47,4 +50,35 @@
                 </div>
             </div>
         </div>
+        <script>
+            $(document).ready( () => {
+
+                $("#role").on('change' , () => {
+                    let roleValue = $("#role").val();
+                    let studentRoleValue = {{\Spatie\Permission\Models\Role::where("name" , "student")->get('id')[0]->id ?? null}};
+                    let classInputDiv = $("#classInput");
+                    if(roleValue == studentRoleValue){
+                        console.log(roleValue);
+                        let html = `
+                                            <label for="" class="form-control-label">Class</label>
+                                            <select class="form-select class" aria-label="Default select example" name="class" id="class">
+                                            <option selected disabled>Select a Class</option>
+                                            @foreach($classes as $class)
+                                                <option value="{{$class->id}}">{{$class->name}}</option>
+                                            @endforeach
+                                            </select>
+
+`
+                        classInputDiv.append(html);
+
+                    }else{
+                        classInputDiv.empty()
+                    }
+
+                })
+            } )
+        </script>
+
 @endsection
+
+

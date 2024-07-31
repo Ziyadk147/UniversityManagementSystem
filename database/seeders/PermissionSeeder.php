@@ -24,6 +24,7 @@ class PermissionSeeder extends Seeder
             "sidebar-view-materials",
             "sidebar-view-permissions",
             "sidebar-view-roles",
+            "sidebar-view-classes",
             "create-course",
             "edit-course",
             "delete-course",

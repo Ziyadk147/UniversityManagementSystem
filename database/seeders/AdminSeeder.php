@@ -32,7 +32,7 @@ class AdminSeeder extends Seeder
             ])->id;
 
             Admin::create([
-                "user_id" => $user->id,
+                "user_id" => $user,
             ]);
 
             DB::table('model_has_roles')->insert([
