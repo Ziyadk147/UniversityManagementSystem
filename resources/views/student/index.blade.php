@@ -7,7 +7,7 @@
                 <div class="card-header py-3">
                     <div class="row">
                         <div class="col">
-                            <h2 class="m-0 font-weight-bold text-primary">{{$course->name}}</h2>
+                            <h2 class="m-0 font-weight-bold text-primary">{{__("Students")}}</h2>
                         </div>
                     </div>
                 </div>
@@ -18,21 +18,21 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Capacity</th>
+                                <th>Class</th>
                                 <th>Link</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($classes as  $class)
+                            @foreach($students as  $student)
                                 <tr>
-                                    <td>{{$class->id}}</td>
+                                    <td>{{$student->id}}</td>
 
-                                    <td>{{$class->name}}</td>
+                                    <td>{{$student->name}}</td>
 
-                                    <td>{{$class->capacity}}</td>
+                                    <td>{{$student->Class->name}}</td>
 
                                     <td>
-                                        <a href="{{route('class.show' , $class->id)}}">
+                                        <a href="{{route('class.show' , $student->Class->id)}}">
                                             <button class="btn btn-info btn-sm">
                                                 Class Page
                                             </button>

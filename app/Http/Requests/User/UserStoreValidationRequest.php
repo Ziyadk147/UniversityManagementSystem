@@ -26,6 +26,7 @@ class UserStoreValidationRequest extends FormRequest
             'email'  => 'required|email|unique:users',
             'password'  => 'required',
             'role'  => 'required',
+            'class' => "",
         ];
     }
 }

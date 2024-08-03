@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Models\Student;
 use App\Repositories\StudentRepository;
-use app\services\StudentService;
+use App\Services\StudentService;
 use Illuminate\Support\ServiceProvider;
 
 class StudentServiceProvider extends ServiceProvider

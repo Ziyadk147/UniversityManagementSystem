@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\UserStoreValidationRequest;
 use App\Http\Requests\User\UserUpdateValidationRequest;
 use App\Repositories\UserRepository;
+use App\Services\ClassService;
 use App\Services\RoleService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -12,12 +13,13 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
-    protected $userService , $roleService;
+    protected $userService , $roleService , $classService;
 
-    public function __construct(UserService $userService , RoleService $roleService)
+    public function __construct(UserService $userService , RoleService $roleService , ClassService $classService)
     {
         $this->userService = $userService;
         $this->roleService = $roleService;
+        $this->classService = $classService;
     }
 
     /**
@@ -25,6 +27,7 @@ class UserController extends Controller
      */
     public function index()
     {
+
         $payload['users'] = $this->userService->getAllUsers();
         foreach ($payload['users'] as $key => $user){
             $payload['userRoles'][$key] = $this->userService->getUserRoles($user);
@@ -38,8 +41,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = $this->roleService->getAllRoles();
-        return view('user.create' , compact('roles'));
+        $payload['roles'] = $this->roleService->getAllRoles();
+        $payload['classes'] = $this->classService->getAllClasses();
+        return view('user.create' , $payload);
     }
 
     /**
@@ -71,6 +75,9 @@ class UserController extends Controller
         $payload['user'] = $this->userService->getUserById($id);
         $payload['userRole'] = $this->userService->getUserRoles($payload['user']);
         $payload['roles'] = $this->roleService->getAllRoles();
+        $payload['classes'] = $this->classService->getAllClasses();
+        $payload['userClass'] = $payload['user']->Student->Class ?? null;
+
         return view('user.edit' , $payload);
     }
 
@@ -82,7 +89,7 @@ class UserController extends Controller
 
         $user = $this->userService->updateUser($request , $id);
 
-            return to_route('user.index');
+        return to_route('user.index');
     }
 
     /**

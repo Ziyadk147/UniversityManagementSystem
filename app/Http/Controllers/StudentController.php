@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use App\Repositories\StudentRepository;
+use App\Services\StudentService;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    protected $studentRepository;
+    protected $studentService;
 
-    public function __construct(StudentRepository $studentRepository)
+    public function __construct(StudentService $studentService)
     {
-        $this->studentRepository = $studentRepository;
+        $this->studentService = $studentService;
     }
 
     /**
@@ -20,7 +21,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $payload['students'] = $this->studentService->getAllStudents();
+        return view('student.index', $payload);
     }
 
     /**

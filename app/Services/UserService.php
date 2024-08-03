@@ -28,9 +28,14 @@ class UserService
 
     public function storeUser($request)
     {
+//        dd($request);
         $payload['name'] = $request->name;
         $payload['email'] = $request->email;
         $payload['password'] = Hash::make($request->password);
+        $payload["class"] = $request->class ?? null;
+
+//        dd($payload);
+
         $role = $this->roleRepository->getRoleById($request->role);
 
         return $this->userRepository->storeUser($payload, $role);
@@ -53,6 +58,7 @@ class UserService
     {
         $payload['name'] = $request->name;
         $payload['email'] = $request->email;
+        $payload["class"] = $request->class ?? null;
         $role = $this->roleRepository->getRoleById($request->role);
         return $this->userRepository->updateUser($payload , $role , $id);
     }
