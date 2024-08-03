@@ -1,6 +1,6 @@
 <?php
 
-namespace app\services;
+namespace app\Services;
 
 use App\Models\Student;
 use App\Repositories\StudentRepository;
@@ -14,5 +14,8 @@ class StudentService{
         $this->studentRepository = $studentRepository;
     }
 
-
+    public function getAllStudents()
+    {
+        return $this->studentRepository->getAllStudents();
+    }
 }

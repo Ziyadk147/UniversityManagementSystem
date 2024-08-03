@@ -10,25 +10,9 @@
                             <h2 class="m-0 font-weight-bold text-primary">Classes</h2>
                         </div>
                         <div class="col-sm-6 text-right">
-{{--                            @can("create-class")--}}
                                 <a href="{{route('class.create')}}"><button class="btn btn-primary btn-sm">Create New class</button></a>
-{{--                            @endcan--}}
-{{--                            @can("bind-courses")--}}
                                 <a href="{{route('class.bind')}}"><button class="btn btn-info btn-sm">Bind Courses To Class</button></a>
-{{--                            @endcan--}}
                         </div>
-{{--                        @can("create-user")--}}
-{{--                            <div class="col-sm text-right m-0 p-0">--}}
-
-{{--                                <a href="{{route('class.create')}}"><button class="btn btn-primary btn-sm">Create New Class</button></a>--}}
-
-{{--                            </div>--}}
-{{--                        @endcan--}}
-{{--                            <div class="co">--}}
-
-{{--                                <a href="{{route('class.bind')}}"><button class="btn btn-info btn-sm">Assign Courses To Class</button></a>--}}
-
-{{--                            </div>--}}
                     </div>
                 </div>
                 <div class="card-body">
@@ -39,6 +23,7 @@
                                 <th>ID</th>
                                 <th>Class</th>
                                 <th>Capacity</th>
+                                <th>Students Enrolled</th>
                                 @can("edit-user")
                                     <th>Edit</th>
                                 @endcan
@@ -55,6 +40,7 @@
                                     <td>{{$class->id}}</td>
                                     <td>{{$class->name}}</td>
                                     <td>{{$class->capacity}}</td>
+                                    <td>{{$class->student_quantity}}</td>
                                     @can("edit-user")
 
                                         <td>
@@ -65,7 +51,7 @@
                                     @endcan
                                     <td>
                                         <a href="{{route('class.show' , $class->id)}}">
-                                            <button class="btn btn-sm btn-info">Show Courses</button>
+                                            <button class="btn btn-sm btn-info">View</button>
                                         </a>
                                     </td>
                                     @can("delete-user")

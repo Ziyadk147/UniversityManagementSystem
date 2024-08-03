@@ -5,10 +5,12 @@ namespace App\Repositories;
 
 use App\Interfaces\UserInterface;
 use App\Models\Admin;
+use App\Models\Classes;
 use App\Models\Images;
 use App\Models\Student;
 use App\Models\User;
-use app\services\StudentService;
+use App\Services\ClassService;
+use App\Services\StudentService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -30,30 +32,29 @@ class UserRepository implements  UserInterface{
 
     public function storeUser($data , $role)
     {
-//        dd($data);
         DB::transaction(function() use($data , $role){
 
             $createdUser = $this->user->create($data);
-
-            $createdUser->assignRole($role);
-
+            $class = Classes::where("id" , $data['class'])->get()[0] ?? null;
             if($role->name == "student"){
-
-                Student::create([
-
-                    'user_id' => $createdUser->id,
-                    "class_id" => $data['class']
-                ]);
-
+                if($class['student_quantity'] < $class['capacity']){
+                    $createdUser->assignRole($role);
+                    $student = Student::create([
+                        'user_id' => $createdUser->id,
+                        "class_id" => $data['class']
+                    ]);
+                    $class->update([
+                        'student_quantity' => $student->Class->student_quantity + 1
+                    ]);
+                }
             }
             elseif ($role->name == "admin"){
                 $admin = Admin::create([
                     "user_id" => $createdUser->id
                 ]);
             }
-
             return $createdUser;
-            });
+        });
     }
 
     public function updateUser($payload ,$role, $id)
@@ -70,18 +71,16 @@ class UserRepository implements  UserInterface{
 //TODO://Refactor later
            if($role->name == "admin"){
 
-
                if($student != null){
-
-                    $student->delete();
-
+                   $student->Class()->update([
+                       'student_quantity' => $student->Class->student_quantity - 1
+                   ]);
+                   $student->delete();
                 }
                 if($admin != null){
-
                    $admin->update([
                        "user_id" => $user->id
                    ]);
-
                 }
                 else{
                     Admin::create([
@@ -96,12 +95,21 @@ class UserRepository implements  UserInterface{
                         'user_id' => $user->id ,
                          'class_id' => $payload['class'],
                     ]);
+
                 }
                 else{
-                    Student::create([
-                        "user_id" => $user->id,
-                        'class_id' => $payload['class'],
-                    ]);
+                    if($role->name == "student"){
+                        $class  = Classes::where('id' , $payload['class'])->get();
+                        if($class->student_quantity < $class->quantity){
+                            $student = Student::create([
+                                'user_id' => $user->id,
+                                "class_id" => $payload['class']
+                            ]);
+                            $class->update([
+                                'student_quantity' => $student->Class->student_quantity + 1
+                            ]);
+                        }
+                    }
                 }
                 if($admin != null){
                     $admin->delete();
@@ -159,6 +167,9 @@ class UserRepository implements  UserInterface{
             $admin = Admin::where("user_id" , $user->id)->first()  ;
 
             if($student != null){
+                $student->Class()->update([
+                    'student_quantity' => $student->Class->student_quantity - 1
+                ]);
                 $student->delete();
             }
             if($image != null){

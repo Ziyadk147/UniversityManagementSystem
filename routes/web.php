@@ -31,7 +31,7 @@ Route::controller(\App\Http\Controllers\MaterialController::class)->prefix('/mat
 Route::controller(\App\Http\Controllers\ClassesController::class)->prefix('/class')->group(function(){
     Route::get('/bind' , 'bindCourseToClass')->name('class.bind');
     Route::post("/bind-store" , "bindStore")->name('class.bindStore');
-    Route::post("/get-class-courses" , "getCourses")->name("class.getCourses"); 
+    Route::post("/get-class-courses" , "getCourses")->name("class.getCourses");
 });
 
 
@@ -42,6 +42,6 @@ Route::resource('/user' , \App\Http\Controllers\UserController::class);
 Route::resource('/course' , \App\Http\Controllers\CourseController::class);
 Route::resource('/material' , \App\Http\Controllers\MaterialController::class);
 Route::resource('/class' , \App\Http\Controllers\ClassesController::class);
-
+Route::resource('/student' , \App\Http\Controllers\StudentController::class);
 
 

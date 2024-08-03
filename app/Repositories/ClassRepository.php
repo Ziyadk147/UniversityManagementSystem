@@ -33,8 +33,11 @@ class ClassRepository implements ClassInterface
 
     public function updateClass($payload , $class)
     {
+        if($payload['capacity'] >= $class->student_quantity){
 
-        return $class->update($payload);
+            return $class->update($payload);
+
+        }
 
     }
 
@@ -42,7 +45,7 @@ class ClassRepository implements ClassInterface
     {
         $class = $this->getClassById($id);
         $payload["class"] = $class;
-        $payload["courses"] = $class->Course;
+        $payload["courses"] = $class->Course ?? null;
         return $payload;
 
     }

@@ -12,7 +12,8 @@ class Classes extends Model
     protected $fillable = [
 
         'name',
-        'capacity'
+        'capacity',
+        'student_quantity'
 
     ];
 
@@ -20,7 +21,7 @@ class Classes extends Model
     public function Student()
     {
 
-        return $this->hasMany(Student::class);
+        return $this->hasMany(Student::class , 'class_id' , 'id');
 
     }
 

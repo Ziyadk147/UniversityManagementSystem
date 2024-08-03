@@ -53,9 +53,10 @@ class ClassesController extends Controller
      */
     public function show($id)
     {
-        $payload= $this->classService->getClassCourses($id);
+        $payload = $this->classService->getClassCourses($id);
+        $payload['students'] = $this->classService->getClassById($id)->Student;
 
-
+//        dd($payload);
         return view('class.show' , $payload);
     }
 

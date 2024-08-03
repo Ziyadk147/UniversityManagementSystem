@@ -52,21 +52,47 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="{{route('class.index')}}">
                             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fa fa-solid fa-book text-primary text-sm opacity-10"></i>
+                                <i class="fa fa-solid fa-book text-primary text-sm "></i>
                             </div>
                             <span class="nav-link-text ms-1">Classes</span>
                         </a>
                     </li>
                 @endcan
             @can('sidebar-view-users')
-            <li class="nav-item">
-                <a class="nav-link active" href="{{route('user.index')}}">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-solid fa-user text-primary text-sm opacity-10"></i>
+{{--            <li class="nav-item">--}}
+{{--                <a class="nav-link active" href="{{route('user.index')}}">--}}
+{{--                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">--}}
+{{--                        <i class="fa fa-solid fa-user text-primary text-sm opacity-10"></i>--}}
+{{--                    </div>--}}
+{{--                    <span class="nav-link-text ms-1">User Management</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+                    <div class="dropdown text-center">
+                        <li class="nav-item">
+                            <a href="#usermanagement" class="nav-link" data-bs-toggle="collapse" >
+                                <i class="fa fa-solid fa-user text-primary text-sm opacity-10"></i>
+                                <span class="nav-link-text mx-3">User Management</span>
+                            </a>
+                            <div class="collapse show" id="usermanagement">
+                                <ul class="nav nav-sm flex-column">
+{{--                                    @can('sidebar-view-students')--}}
+                                        <li class="nav-item">
+                                            <a href="{{route('student.index')}}" class="nav-link">
+                                                <span class="nav-link-test">Students</span>
+                                            </a>
+                                        </li>
+{{--                                    @endcan--}}
+{{--                                    @can('sidebar-view-roles')--}}
+                                        <li class="nav-item">
+                                            <a href="{{route('user.index')}}" class="nav-link">
+                                                <span class="nav-link-text">All Users</span>
+                                            </a>
+                                        </li>
+{{--                                    @endcan--}}
+                                </ul>
+                            </div>
+                        </li>
                     </div>
-                    <span class="nav-link-text ms-1">User Management</span>
-                </a>
-            </li>
             @endcan
             @can('sidebar-view-courses')
             <li class="nav-item">
